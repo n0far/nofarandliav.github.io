@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ─────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fdf6f0;
+  color: #3d1a24;
+  font-family: 'Lora', Georgia, serif;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #fdf6f0; }
+::-webkit-scrollbar-thumb { background: #d4878f; border-radius: 3px; }
+
+/* ─── Floating Hearts Animation ─────────────────────────────── */
+@keyframes floatUp {
+  0%   { transform: translateY(0)      translateX(0)    rotate(0deg);   opacity: var(--heart-opacity, 0.3); }
+  15%  { transform: translateY(-15vh)  translateX(12px) rotate(8deg);   opacity: var(--heart-opacity, 0.3); }
+  30%  { transform: translateY(-30vh)  translateX(-8px) rotate(-4deg);  opacity: var(--heart-opacity, 0.3); }
+  50%  { transform: translateY(-50vh)  translateX(10px) rotate(5deg);   opacity: var(--heart-opacity, 0.3); }
+  70%  { transform: translateY(-70vh)  translateX(-6px) rotate(-6deg);  opacity: var(--heart-opacity, 0.3); }
+  90%  { transform: translateY(-90vh)  translateX(8px)  rotate(3deg);   opacity: calc(var(--heart-opacity, 0.3) * 0.5); }
+  100% { transform: translateY(-110vh) translateX(0)    rotate(20deg);  opacity: 0; }
+}
+
+.heart-float {
+  animation: floatUp linear infinite;
+  animation-duration: var(--heart-duration, 12s);
+  animation-delay: var(--heart-delay, 0s);
+}
+
+/* Easter egg heart pulse */
+@keyframes goldenPulse {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(201, 168, 76, 0.5)); }
+  50%       { filter: drop-shadow(0 0 18px rgba(201, 168, 76, 1)) drop-shadow(0 0 36px rgba(201, 168, 76, 0.5)); }
+}
+.easter-heart {
+  animation:
+    floatUp var(--heart-duration, 12s) linear var(--heart-delay, 0s) infinite,
+    goldenPulse 2.5s ease-in-out infinite;
+  cursor: pointer;
+}
+
+/* ─── Section Transitions ───────────────────────────────────── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Timeline ──────────────────────────────────────────────── */
+.timeline-line {
+  background: linear-gradient(to bottom, transparent 0%, #d4878f 8%, #d4878f 92%, transparent 100%);
+}
+
+/* ─── Cards ─────────────────────────────────────────────────── */
+.glass-card {
+  background: rgba(255, 251, 247, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 135, 143, 0.25);
+  box-shadow: 0 4px 24px rgba(107, 45, 62, 0.08), 0 1px 4px rgba(107, 45, 62, 0.05);
+}
+
+/* ─── Photo Placeholder ─────────────────────────────────────── */
+.photo-placeholder {
+  background: linear-gradient(135deg, #f9e8ea 0%, #fdf6f0 60%, rgba(232, 201, 122, 0.15) 100%);
+  border: 2px dashed rgba(212, 135, 143, 0.5);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #c9848a;
+  font-size: 0.8rem;
+  gap: 6px;
+  font-family: 'Lora', serif;
+}
+
+/* ─── Paper Texture (Love Letter) ───────────────────────────── */
+.letter-paper {
+  background-color: #fffef8;
+  background-image:
+    repeating-linear-gradient(
+      transparent,
+      transparent 31px,
+      rgba(201, 168, 76, 0.18) 31px,
+      rgba(201, 168, 76, 0.18) 32px
+    );
+  line-height: 32px;
+}
+
+/* ─── Envelope ───────────────────────────────────────────────── */
+.envelope-flap {
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* ─── Memory Jar ─────────────────────────────────────────────── */
+@keyframes jarWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  20%       { transform: rotate(-4deg); }
+  40%       { transform: rotate(4deg); }
+  60%       { transform: rotate(-3deg); }
+  80%       { transform: rotate(2deg); }
+}
+.jar-wiggle { animation: jarWiggle 0.5s ease-in-out; }
+
+/* ─── Bounce Scroll Indicator ───────────────────────────────── */
+@keyframes bounceGentle {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(10px); }
+}
+.bounce-gentle { animation: bounceGentle 2s ease-in-out infinite; }
+
+/* ─── Sparkle (Easter Egg) ───────────────────────────────────── */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  40%       { opacity: 1; transform: scale(1) rotate(120deg); }
+  60%       { opacity: 1; transform: scale(1.1) rotate(180deg); }
+}
+.sparkle { animation: sparkle 1.8s ease-in-out infinite; }
+
+/* ─── Quiz feedback shake ────────────────────────────────────── */
+@keyframes shakeNo {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-8px); }
+  40%       { transform: translateX(8px); }
+  60%       { transform: translateX(-5px); }
+  80%       { transform: translateX(5px); }
+}
+.shake-no { animation: shakeNo 0.5s ease-in-out; }
+
+/* ─── Reason card decorative doodle ─────────────────────────── */
+@keyframes drawHeart {
+  0%   { stroke-dashoffset: 200; }
+  100% { stroke-dashoffset: 0; }
+}
+.draw-heart { animation: drawHeart 1.2s ease forwards; }
